@@ -1,7 +1,4 @@
-
-
 import 'dart:developer';
-
 import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 import 'package:tflite_v2/tflite_v2.dart';
@@ -21,6 +18,7 @@ class ScanController extends GetxController{
   bool get isInitialized => _isInitialized.value;
   CameraController get cameraController => _cameraController;
 
+
   @override
   void onInit() {
     initCamera();
@@ -35,6 +33,7 @@ class ScanController extends GetxController{
     super.dispose();
     Tflite.close();
   }
+
 
   Future<void> _initTflite() async{
     await Tflite.loadModel(

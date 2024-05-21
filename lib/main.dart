@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:id_ob/camera/camera_screen.dart';
+import 'package:id_ob/home.dart';
 
 import 'global_bindings.dart';
 
@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false ,
-      home: const CameraScreen(),
-      title: "Camera App",
+      home: const HomePage(),
+      title: "Id. obiecte in timp real",
       initialBinding: GlobalBindings(),
     );
   }
