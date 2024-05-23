@@ -14,6 +14,7 @@ class ScanController extends GetxController{
   var w = 0.0;
   var h = 0.0;
   var label = "";
+  double confid = 0.0;
 
   bool get isInitialized => _isInitialized.value;
   CameraController get cameraController => _cameraController;
@@ -90,6 +91,7 @@ class ScanController extends GetxController{
       var detectedObj = recognitions.first;
       log("result is $detectedObj");
       if (detectedObj['confidenceInClass'] * 100 > 45) {
+        confid = detectedObj['confidenceInClass'] * 100;
         label = detectedObj['detectedClass'].toString();
         h = detectedObj['rect']['h'];
         w = detectedObj['rect']['w'];

@@ -11,11 +11,22 @@ class CameraViewer extends StatelessWidget {
   @override
     Widget build(BuildContext context) {
       return GetX<ScanController>(builder: (controller) {
+        var confidence = controller.confid.toStringAsFixed(2);
         if (!controller.isInitialized) {
           return Container();
         }
-        return SizedBox(
-            child: Stack(
+        return Scaffold(
+          appBar: AppBar(title: const Text("Detectare obiecte",
+          style: TextStyle(color: Colors.white, fontSize: 20),),
+            leading: IconButton( color: Colors.white,
+              icon: const Icon(Icons.arrow_back_ios_new),
+              onPressed: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()), //fix pls
+              );},
+            ),
+            backgroundColor: Colors.green,),
+            body: Stack(
               children: [
                 CameraPreview(controller.cameraController),
                 Positioned(
@@ -43,23 +54,24 @@ class CameraViewer extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                color: Colors.green,
+                width: double.infinity,
+                constraints: const BoxConstraints(
+                  minHeight: 30.0, // Minimum height constraint for the bar
+                ),
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomePage()), //fix pls
-                      );
-                    }, // icon of the button
-                    style: ElevatedButton.styleFrom( // styling the button
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(20),
-                      backgroundColor: Colors.white, // Button color
-                    ),
-                    child: const Icon(Icons.arrow_back_ios_new, color: Colors.green),
+                  child: Text(
+                    'Încrederea detectării: $confidence%',
+                    style: const TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
                   ),
                 ),
+              ),
+            )
               ],
             ));
       });
